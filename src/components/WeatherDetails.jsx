@@ -23,19 +23,20 @@ const WeatherDetails = ({ WeatherData }) => {
     return `${d}° ${m}' ${s}"`;
   }
   return (
-    <div
-      className="text-[#f3ff14] flex rounded-3xl p-4 h-[80vh]  my-7 capitalize
-     shadow-white  shadow-sm w-[70vw] mx-auto bg-gradient-to-br to-[#0396ff25] from-white/20 backdrop-filter"
+   <div className="w-screen flex justify-center items-center md:mt-5">
+     <div
+      className="text-[#f3ff14] flex flex-col rounded-3xl p-4 h-fit md:h-[80vh] my-7 capitalize md:flex-row
+     shadow-white  shadow-sm w-[90vw]  bg-gradient-to-br to-[#0396ff25] from-white/20 backdrop-filter"
     >
       {WeatherData ? (
         <>
-          <div className="bg-gradient-to-br from-white/10 to-white/15   w-[40vw] rounded-3xl p-4 ml-1">
+          <div className="bg-gradient-to-br from-white/10 to-white/15   w-full lg:w-[50vw] rounded-3xl p-4 h-fit md:h-full pb-6">
             <img
               src={WeatherData.current.is_day === 1 ? image : night}
               alt="weather app"
               className="w-[170px] mx-auto mt-5 "
             />
-            <div className="flex justify-center items-center gap-1 text-xl mt-5 text-justify">
+            <div className="flex justify-center items-center gap-1 text-md sm:text-xl mt-5 text-justify">
               <h2 className="italic inline-block  mr-1 ">
                 {WeatherData.location.name}{" "}
               </h2>
@@ -53,31 +54,38 @@ const WeatherDetails = ({ WeatherData }) => {
               {WeatherData.location.localtime}
             </p>
 
-            <div className="grid grid-flow-row grid-cols-2 px-7 text-sm  gap-5 mt-7 items-center justify-center ml-5">
-              <div className="font-bold">Latitude :</div>
-              <div>{convertToDMS(WeatherData.location.lat)}</div>
-              <div className="font-bold">Longtitude :</div>
-              <div>{convertToDMS(WeatherData.location.lon)}</div>
-              <div className="font-bold">Time Zone :</div>
-              <div>{WeatherData.location.tz_id}</div>
+            <div className="grid grid-flow-row grid-cols-2 px-2 text-sm md:gap-2 gap-3 mt-7 items-center justify-center ml-5 md:ml-0">
+              <div className="font-bold sm:pl-14 md:pl-5">Latitude :</div>
+              <div className=" sm:pl-14  md:pl-5">{convertToDMS(WeatherData.location.lat)}</div>
+              <div className="font-bold sm:pl-14  md:pl-5">Longtitude :</div>
+              <div className=" sm:pl-14  md:pl-5">{convertToDMS(WeatherData.location.lon)}</div>
+              <div className="font-bold sm:pl-14  md:pl-5">Time Zone :</div>
+              <div className=" sm:pl-14  md:pl-5">{WeatherData.location.tz_id}</div>
             </div>
           </div>
-          <div className="w-[70vw] p-5 title">
-            <h2 className="text-center text-3xl title text-cyan-300">
+
+
+          <div className="w-full p-5 title">
+            <h2 className="text-center text-lg title text-cyan-300 sm:text-2xl lg:text-3xl">
               Weather Conditions
             </h2>
             <p className="text-center mt-2 ">
               {" "}
               Sky {WeatherData.current.condition.text}
             </p>
-            <div className="mx-10 mt-10 gap-7 grid grid-flow-row grid-cols-2  ">
+
+            <div className="text-[14px] sm:ml-5  gap-3 mt-4 xl:mt-10 md:mt-4 sm:gap-4 sm:mt-5 lg:mt-7 lg:gap-7 
+            md:gap-5 md:mx-10 grid md:grid-cols-1 lg:grid-cols-2
+            grid-flow-row sm:grid-cols-2 grid-cols-1 text-xs lg:text-[0.8rem] xl:text-lg">
               <div className="flex gap-3  items-center">
-                <TbTemperature />
-                <h3>Temperature:</h3>
-                <p>
-                  {WeatherData.current.temp_c}
-                  &deg;C / {WeatherData.current.temp_f}&deg;F
-                </p>
+              <TbTemperature  />
+                <h3>
+                  Temperature :
+                  <span>
+                    {" " + WeatherData.current.temp_c}
+                    &deg;C / {WeatherData.current.temp_f}&deg;F
+                  </span>
+                </h3>
               </div>
               <div className="flex gap-3  items-center">
                 <FaWind />
@@ -151,6 +159,7 @@ const WeatherDetails = ({ WeatherData }) => {
         </div>
       )}
     </div>
+   </div>
   );
 };
 
