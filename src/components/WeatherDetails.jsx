@@ -14,6 +14,14 @@ import { GiHeatHaze } from "react-icons/gi";
 import { PiHandCoins } from "react-icons/pi";
 const WeatherDetails = ({ WeatherData }) => {
   // console.log(WeatherData);
+  function convertToDMS(deg) {
+    const d = Math.floor(deg); // Get the degree part
+    const minFloat = (deg - d) * 60;
+    const m = Math.floor(minFloat); // Get the minutes part
+    const s = ((minFloat - m) * 60).toFixed(2); // Get the seconds part, rounded to 2 decimal places
+
+    return `${d}° ${m}' ${s}"`;
+  }
   return (
     <div
       className="text-[#f3ff14] flex rounded-3xl p-4 h-[80vh]  my-7 capitalize
@@ -47,9 +55,9 @@ const WeatherDetails = ({ WeatherData }) => {
 
             <div className="grid grid-flow-row grid-cols-2 px-7 text-sm  gap-5 mt-7 items-center justify-center ml-5">
               <div className="font-bold">Latitude :</div>
-              <div>{WeatherData.location.lat}</div>
+              <div>{convertToDMS(WeatherData.location.lat)}</div>
               <div className="font-bold">Longtitude :</div>
-              <div>{WeatherData.location.lon}</div>
+              <div>{convertToDMS(WeatherData.location.lon)}</div>
               <div className="font-bold">Time Zone :</div>
               <div>{WeatherData.location.tz_id}</div>
             </div>
@@ -114,17 +122,17 @@ const WeatherDetails = ({ WeatherData }) => {
                 </p>
               </div>
               <div className="flex gap-3  items-center">
-              <GiHeatHaze />
+                <GiHeatHaze />
                 <h3>Heat Index :</h3>
                 <p>{WeatherData.current.heatindex_c}&deg;C</p>
               </div>
               <div className="flex gap-3  items-center">
-              <PiHandCoins />
+                <PiHandCoins />
                 <h3>feels Like :</h3>
                 <p>{WeatherData.current.feelslike_c}&deg;C</p>
               </div>
               <div className="flex gap-3  items-center">
-              <BsThermometerSnow />
+                <BsThermometerSnow />
                 <h3>Wind Chill:</h3>
                 <p>
                   {WeatherData.current.windchill_c}&deg;C /{" "}
